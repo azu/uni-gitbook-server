@@ -1,0 +1,58 @@
+{
+  "directories": {
+    "test": "test"
+  },
+  "author": "azu",
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/"
+  ],
+  "name": "uni-gitbook-server",
+  "version": "1.0.0",
+  "description": "[Unofficial] Alternative of GitBook server.",
+  "main": "lib/indexjs",
+  "bin": {
+    "uni-gitbook-server": "./bin/cmd.js"
+  },
+  "scripts": {
+    "test": "mocha test/",
+    "build": "NODE_ENV=production babel src --out-dir lib --source-maps",
+    "watch": "babel src --out-dir lib --watch --source-maps",
+    "prepublish": "npm run --if-present build"
+  },
+  "keywords": [
+    "gitbook",
+    "serve",
+    "markdown",
+    "reload",
+    "livereload",
+    "server"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/uni-gitbook-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/azu/uni-gitbook-server/issues"
+  },
+  "homepage": "https://github.com/azu/uni-gitbook-server",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-jsdoc-to-assert": "^4.0.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.18.0",
+    "gitbook-cli": "^2.3.0",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2"
+  },
+  "dependencies": {
+    "browser-sync": "^2.18.5",
+    "chokidar": "^1.6.1",
+    "cross-spawn": "^5.0.1",
+    "debug": "^2.6.0",
+    "optionator": "^0.8.2"
+  }
+}
