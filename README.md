@@ -6,11 +6,14 @@
 
 Install with [npm](https://www.npmjs.com/):
 
-    npm install uni-gitbook-server
+    npm install uni-gitbook-server -g
 
 ## Usage
 
-- [ ] Write usage instructions
+```
+$ uni-gitbook-server --bookSrouce /path/to/project-dir/
+```
+
 
 ## Changelog
 
