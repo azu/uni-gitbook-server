@@ -11,7 +11,7 @@ Install with [npm](https://www.npmjs.com/):
 ## Usage
 
 ```
-$ uni-gitbook-server --bookSrouce /path/to/project-dir/
+$ uni-gitbook-server --bookSrouce '/path/to/project/**/*.md'
 ```
 
 
