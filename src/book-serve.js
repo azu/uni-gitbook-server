@@ -1,23 +1,30 @@
 // MIT © 2017 azu
 "use strict";
+const debug = require("debug")("uni-gitbook-server:book-serve");
 const browserSync = require("browser-sync");
 const fs = require("fs");
-module.exports = function(_bookRoot, watchPattern, onReload) {
-  const bs = browserSync.create("GitBook Server");
-  bs.watch(watchPattern).on("change", function(path) {
-    setTimeout(() => {
-      if (fs.existsSync(path)) {
-        bs.reload(path);
-        onReload(path);
-      }
-    }, 2000);
-  });
-  bs.init({
-    server: _bookRoot,
-    open: false,
-    scrollElementMapping: ['.body-inner'],
-    reloadDelay: 2000,
-    reloadDebounce: 2000
-  });
+const chokidar = require("chokidar");
+module.exports = function (bookRoot, watchPattern, onReload) {
+    const bs = browserSync.create("GitBook Server");
+    debug(`watchPattern: ${watchPattern}`);
+    const watcher = chokidar.watch(watchPattern, {
+        persistent: true
+    });
+    // Add event listeners.
+    const onChange = (filePath, stats) => {
+        debug(`Change Path: ${filePath}`);
+        if (fs.existsSync(filePath)) {
+            bs.reload(filePath);
+            onReload(filePath);
+        }
+    };
+    watcher.on('add', onChange).on('change', onChange);
+    bs.init({
+        server: bookRoot,
+        open: false,
+        scrollRestoreTechnique: "cookie",
+        scrollElements: ['.body-inner'],
+        reloadDebounce: 2000
+    });
 };
 //# sourceMappingURL=book-serve.js.map
